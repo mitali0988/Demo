@@ -2,24 +2,16 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import ImageUploader from './components/ImageUploader';
+import TextInput from './components/TextInput';
+import { useOCR } from './hooks/useOCR';
 function App() {
+  const {text, loading, extractText} = useOCR();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <div className="max-w-xl mx-auto p-6">
+     <ImageUploader onImageUpload={extractText}></ImageUploader>
+     <TextInput text={text} loading={loading}></TextInput>
+   </div>
   );
 }
 
